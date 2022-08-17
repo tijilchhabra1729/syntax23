@@ -1,9 +1,8 @@
 from Tool import app
 from Tool.forms import RegistrationForm, LoginForm
-# from Tool.models import User, Team, Events, Rent, Knowledge
+from Tool.models import User
 from flask import render_template, request, url_for, redirect, flash, abort, jsonify, make_response
 from flask_login import current_user, login_required, login_user, logout_user
-# from picture_handler import add_profile_pic, add_team_pic, add_rent_pic, add_knowledge_pic
 import secrets
 from sqlalchemy import desc, asc
 import os
