@@ -42,7 +42,8 @@ def register():
         phone1=form.phone1.data,
         phoneb=form.phoneb.data,
 
-        interest=form.interest.data)
+        interest=form.interest.data,
+        password = form.password.data)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('login'))

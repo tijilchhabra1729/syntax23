@@ -31,10 +31,13 @@ class User(db.Model,UserMixin):
     phoneb = db.Column(db.Integer)
 
     interest = db.Column(db.String(128))
+    password_hash = db.Column(db.String(128))
+
     def check_password(self,password):
         return check_password_hash(self.password_hash,password)
 
-    def __init__(self, name1, name2, name3, name4, name5, name6, school1, school2, school3, school4, school5, school6, email1, emailb,phone1,phoneb,interest ):
+    def __init__(self, password, name1, name2, name3, name4, name5, name6, school1, school2, school3, school4, school5, school6, email1, emailb,phone1,phoneb,interest ):
+        self.password_hash = generate_password_hash(password)
         self.name1=name1
         self.name2=name2
         self.name3=name3
