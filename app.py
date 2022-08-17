@@ -22,17 +22,29 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
 
-        user = User(name=form.name.data,
-                    username=form.username.data,
-                    email=form.email.data,
-                    password=form.password.data)
+        user = User(name1=form.name1.data,
+        name2=form.name2.data,
+        name3=form.name3.data,
+        name4=form.name4.data or '',
+        name5=form.name5.data or '',
+        name6=form.name6.data or '',
+
+        school1=form.school1.data,
+        school2=form.school2.data,
+        school3=form.school3.data,
+        school4=form.school4.data or '' ,
+        school5=form.school5.data or '',
+        school6=form.school6.data or '',
+
+        email1=form.email1.data,
+        email2=form.email2.data,
+
+        phone1=form.phone1.data,
+        phoneb=form.phoneb.data,
+
+        interest=form.interest.data)
         db.session.add(user)
         db.session.commit()
-        if form.picture.data is not None:
-            id = user.id
-            pic = add_profile_pic(form.picture.data, id)
-            user.profile_image = pic
-            db.session.commit()
         return redirect(url_for('login'))
     return render_template('register.htm', form=form)
 
