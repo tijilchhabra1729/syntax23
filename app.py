@@ -1,17 +1,15 @@
-from Tool import app, db
-from Tool.forms import RegistrationForm, LoginForm, MakeTeamForm, TeamLoginForm, MakeUpcoming, UpdateUserForm, UpdateTeamForm, Make_Rental, UpdateRent, KnowledgeForm, UpdateKnowledgeForm
-from Tool.models import User, Team, Events, Rent, Knowledge
+from Tool import app
+from Tool.forms import RegistrationForm, LoginForm
+# from Tool.models import User, Team, Events, Rent, Knowledge
 from flask import render_template, request, url_for, redirect, flash, abort, jsonify, make_response
 from flask_login import current_user, login_required, login_user, logout_user
-from picture_handler import add_profile_pic, add_team_pic, add_rent_pic, add_knowledge_pic
+# from picture_handler import add_profile_pic, add_team_pic, add_rent_pic, add_knowledge_pic
 import secrets
 from sqlalchemy import desc, asc
 import os
 import json
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, abort
-from twilio.jwt.access_token import AccessToken
-from twilio.jwt.access_token.grants import VideoGrant
 from datetime import datetime
 
 
@@ -70,3 +68,7 @@ def login():
             error = 'No such login Pls create one'
 
     return render_template('login.htm', form=form, error=error)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
