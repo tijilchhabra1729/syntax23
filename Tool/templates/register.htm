@@ -1,5 +1,5 @@
 {%extends 'base.htm'%} {%block content%}
-<body>
+
     <!-- FORM -->
 
     <section class="form flex items-stretch w-11/12">
@@ -16,11 +16,20 @@
             <p class="form__right-text mb-8">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
             </p>
-            {{form.name(class="form__input", placeholder='Name')}}
+            {{form.name1(class="form__input", placeholder='Member 1 Name')}}
+            {{form.name2(class="form__input", placeholder='Member 2 Name')}}
+            {{form.name3(class="form__input", placeholder='Member 3 Name')}}
+            {{form.name4(class="form__input", placeholder='Member 4 Name')}}
+            {{form.name5(class="form__input", placeholder='Member 5 Name')}}
+            {{form.name6(class="form__input", placeholder='Member 6 Name')}}
+
+
+
             {{form.name(class="form__input", placeholder='Email')}}
             {%if form.email.errors%}
             {%for error in form.email.errors%}
             <small class="error">{{error}}</small>
+
             {%endfor%} {%endif%}
             {{form.name(class="form__input", placeholder='Name')}}
             {{form.name(class="form__input", placeholder='Name')}}
@@ -29,7 +38,4 @@
         </form>
     </section>
 
-
-</body>
-
-</html>
+{%endblock%}

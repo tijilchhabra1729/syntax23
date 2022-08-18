@@ -7,7 +7,6 @@ import secrets
 from sqlalchemy import desc, asc
 import os
 import json
-from dotenv import load_dotenv
 from flask import Flask, render_template, request, abort
 from datetime import datetime
 
