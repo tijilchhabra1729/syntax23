@@ -3,13 +3,13 @@ from wtforms import StringField, PasswordField, SubmitField, TextAreaField, File
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import ValidationError
-
+from Tool import app,db
 from flask_login import current_user
 from Tool.models import User
 
 
 class RegistrationForm(FlaskForm):
-    interest = TextAreaField('interest', validators=[DataRequired()])
+    interest = TextAreaField('First Name',validators=[DataRequired()])
     phone1 = IntegerField('phone1', validators=[DataRequired()])
     phoneb = IntegerField('phoneb', validators=[DataRequired()])
     email1 = StringField('Email1', validators=[DataRequired(), Email()])
@@ -19,6 +19,7 @@ class RegistrationForm(FlaskForm):
     name3 = StringField('name3', validators=[DataRequired()])
     name4 = StringField('name4')
     name5 = StringField('name5')
+    name6 = StringField('name6')
     school1 = StringField('school1', validators=[DataRequired()])
     school2 = StringField('school2', validators=[DataRequired()])
     school3 = StringField('school3', validators=[DataRequired()])
@@ -29,12 +30,12 @@ class RegistrationForm(FlaskForm):
     file2 = StringField('Pls attach gdoc link', validators=[DataRequired()])
     file3 = StringField('Pls attach gdoc link', validators=[DataRequired()])
     file4 = StringField('Pls attach gdoc link', validators=[DataRequired()])
-
+    submit = SubmitField('Register')
     password = PasswordField('Password', validators=[DataRequired(), EqualTo(
         'pass_confirm', message='Passwords must match'), Length(min=8, max=16)])
     pass_confirm = PasswordField(
         'Confirm Password', validators=[DataRequired()])
-    submit = SubmitField('Register')
+
 
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():

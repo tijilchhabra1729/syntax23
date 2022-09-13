@@ -1,4 +1,4 @@
-from Tool import app
+from Tool import app,db
 from Tool.forms import RegistrationForm, LoginForm
 from Tool.models import User
 from flask import render_template, request, url_for, redirect, flash, abort, jsonify, make_response
@@ -20,7 +20,7 @@ def index():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-
+        print(9)
         user = User(name1=form.name1.data,
                     name2=form.name2.data,
                     name3=form.name3.data,
@@ -36,7 +36,7 @@ def register():
                     school6=form.school6.data or '',
 
                     email1=form.email1.data,
-                    email2=form.email2.data,
+                    emailb=form.emailb.data,
 
                     phone1=form.phone1.data,
                     phoneb=form.phoneb.data,
@@ -48,6 +48,7 @@ def register():
 
                     interest=form.interest.data,
                     password=form.password.data)
+        print('hey')
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('login'))
@@ -67,7 +68,7 @@ def login():
     error = ''
     if form.validate_on_submit():
 
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email1=form.email.data).first()
 
         if user is not None and user.check_password(form.password.data):
 
@@ -83,7 +84,7 @@ def login():
         elif user is None:
             error = 'No such login Pls create one'
 
-    return render_template('login.htm', form=form, error=error)
+    return render_template('login.htm', form=form, mess=error)
 
 
 if __name__ == '__main__':

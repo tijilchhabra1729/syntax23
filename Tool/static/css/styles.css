@@ -178,7 +178,7 @@ body {
 .hero__container {
     height: 100vh;
     width: 100vw;
-    background-image: url('../img/hero\ bg.jpg');
+    background-image: url('../img/hero_bg.jpg');
     background-size: cover;
 }
 

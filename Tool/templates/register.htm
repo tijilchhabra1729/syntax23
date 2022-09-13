@@ -4,36 +4,132 @@
 
     <section class="form flex items-stretch w-11/12">
         <div class="form__left flex flex-col justify-center items-center">
-            <h2 class="heading-2 mb-8">Lorem Ipsum</h2>
-            {{form.hidden_tag()}}
+
             <p class="form__left-text mb-8">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, voluptate deleniti. Ipsum vel quae esse eum, inventore tempore voluptatem dolorum
             </p>
-            <a href="" class="btn-secondary">Sign In</a>
         </div>
-        <form action="" class="form__right flex flex-col justify-center items-center">
+        <form method="post" class="form__right flex flex-col justify-center items-center">
+          {{form.hidden_tag()}}
             <h1 class="heading-1 mt-16 mb-8">Sign Up</h1>
             <p class="form__right-text mb-8">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
             </p>
             {{form.name1(class="form__input", placeholder='Member 1 Name')}}
+            {%if form.name1.errors%}
+            {%for error in form.name1.errors%}
+            <small class="error">{{error}}</small>
+
+            {%endfor%} {%endif%}
             {{form.name2(class="form__input", placeholder='Member 2 Name')}}
+            {%if form.name2.errors%}
+            {%for error in form.name2.errors%}
+            <small class="error">{{error}}</small>
+
+            {%endfor%} {%endif%}
             {{form.name3(class="form__input", placeholder='Member 3 Name')}}
+            {%if form.name3.errors%}
+            {%for error in form.name3.errors%}
+            <small class="error">{{error}}</small>
+
+            {%endfor%} {%endif%}
             {{form.name4(class="form__input", placeholder='Member 4 Name')}}
             {{form.name5(class="form__input", placeholder='Member 5 Name')}}
             {{form.name6(class="form__input", placeholder='Member 6 Name')}}
 
 
 
-            {{form.name(class="form__input", placeholder='Email')}}
-            {%if form.email.errors%}
-            {%for error in form.email.errors%}
+            {{form.school1(class="form__input", placeholder='Member 1 school')}}
+            {%if form.school1.errors%}
+            {%for error in form.school1.errors%}
             <small class="error">{{error}}</small>
 
             {%endfor%} {%endif%}
-            {{form.name(class="form__input", placeholder='Name')}}
-            {{form.name(class="form__input", placeholder='Name')}}
-            {{form.name(class="form__input", placeholder='Name')}}
+            {{form.school2(class="form__input", placeholder='Member 2 school')}}
+            {%if form.school2.errors%}
+            {%for error in form.school2.errors%}
+            <small class="error">{{error}}</small>
+
+            {%endfor%} {%endif%}
+            {{form.school3(class="form__input", placeholder='Member 3 school')}}
+            {%if form.school3.errors%}
+            {%for error in form.school3.errors%}
+            <small class="error">{{error}}</small>
+
+            {%endfor%} {%endif%}
+            {{form.school4(class="form__input", placeholder='Member 4 school')}}
+            {{form.school5(class="form__input", placeholder='Member 5 school')}}
+            {{form.school6(class="form__input", placeholder='Member 6 school')}}
+
+            {{form.email1(class="form__input", placeholder='Email')}}
+            {%if form.email1.errors%}
+            {%for error in form.email1.errors%}
+            <small class="error">{{error}}</small>
+
+            {%endfor%} {%endif%}
+            {{form.emailb(class="form__input", placeholder='Backup Email')}}
+            {%if form.emailb.errors%}
+            {%for error in form.emailb.errors%}
+            <small class="error">{{error}}</small>
+
+            {%endfor%} {%endif%}
+
+            {{form.phone1(class="form__input", placeholder='phone')}}
+            {%if form.phone1.errors%}
+            {%for error in form.phone1.errors%}
+            <small class="error">{{error}}</small>
+
+            {%endfor%} {%endif%}
+            {{form.phoneb(class="form__input", placeholder='Backup phone')}}
+            {%if form.phoneb.errors%}
+            {%for error in form.phoneb.errors%}
+            <small class="error">{{error}}</small>
+
+            {%endfor%} {%endif%}
+
+            {{form.file1(class="form__input", placeholder='Gdoc Link')}}
+            {%if form.file1.errors%}
+            {%for error in form.file1.errors%}
+            <small class="error">{{error}}</small>
+
+            {%endfor%} {%endif%}
+            {{form.file2(class="form__input", placeholder='Gdoc Link')}}
+            {%if form.file1.errors%}
+            {%for error in form.file1.errors%}
+            <small class="error">{{error}}</small>
+
+            {%endfor%} {%endif%}
+            {{form.file3(class="form__input", placeholder='Gdoc Link')}}
+            {%if form.file1.errors%}
+            {%for error in form.file1.errors%}
+            <small class="error">{{error}}</small>
+
+            {%endfor%} {%endif%}
+            {{form.file4(class="form__input", placeholder='Gdoc Link')}}
+            {%if form.file4.errors%}
+            {%for error in form.file4.errors%}
+            <small class="error">{{error}}</small>
+
+            {%endfor%} {%endif%}
+
+            {{form.interest(class="form__input", placeholder='Special Interest Group Topic')}}
+            {%if form.interest.errors%}
+            {%for error in form.interest.errors%}
+            <small class="error">{{error}}</small>
+
+            {%endfor%} {%endif%}
+              {{form.password(class="form__input", placeholder='password')}}
+
+            {%if form.password.errors%} {%for error in
+              form.password.errors%}
+            <small>{{error}}</small>
+            {%endfor%} {%endif%}
+
+              {{form.pass_confirm(class="form__input" , placeholder='Confirm password')}}
+
+            {%if form.pass_confirm.errors%} {%for error in form.pass_confirm.errors%}
+            <small class="error">{{error}}</small>
+            {%endfor%} {%endif%}
             {{form.submit(class ="btn-primary mb-16")}}
         </form>
     </section>
