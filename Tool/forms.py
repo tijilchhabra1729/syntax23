@@ -16,7 +16,7 @@ class RegistrationForm(FlaskForm):
     emailb = StringField('Emailb', validators=[DataRequired(), Email()])
     name1 = StringField('name1', validators=[DataRequired()])
     name2 = StringField('name2', validators=[DataRequired()])
-    name3 = StringField('name3')
+    name3 = StringField('name3', validators=[DataRequired()])
     name4 = StringField('name4')
     name5 = StringField('name5')
     school1 = StringField('school1', validators=[DataRequired()])
@@ -25,6 +25,11 @@ class RegistrationForm(FlaskForm):
     school4 = StringField('school4')
     school5 = StringField('school5')
     school6 = StringField('school6')
+    file1 = StringField('Pls attach gdoc link', validators=[DataRequired()])
+    file2 = StringField('Pls attach gdoc link', validators=[DataRequired()])
+    file3 = StringField('Pls attach gdoc link', validators=[DataRequired()])
+    file4 = StringField('Pls attach gdoc link', validators=[DataRequired()])
+
     password = PasswordField('Password', validators=[DataRequired(), EqualTo(
         'pass_confirm', message='Passwords must match'), Length(min=8, max=16)])
     pass_confirm = PasswordField(
