@@ -22,27 +22,32 @@ def register():
     if form.validate_on_submit():
 
         user = User(name1=form.name1.data,
-        name2=form.name2.data,
-        name3=form.name3.data,
-        name4=form.name4.data or '',
-        name5=form.name5.data or '',
-        name6=form.name6.data or '',
+                    name2=form.name2.data,
+                    name3=form.name3.data,
+                    name4=form.name4.data or '',
+                    name5=form.name5.data or '',
+                    name6=form.name6.data or '',
 
-        school1=form.school1.data,
-        school2=form.school2.data,
-        school3=form.school3.data,
-        school4=form.school4.data or '' ,
-        school5=form.school5.data or '',
-        school6=form.school6.data or '',
+                    school1=form.school1.data,
+                    school2=form.school2.data,
+                    school3=form.school3.data,
+                    school4=form.school4.data or '',
+                    school5=form.school5.data or '',
+                    school6=form.school6.data or '',
 
-        email1=form.email1.data,
-        email2=form.email2.data,
+                    email1=form.email1.data,
+                    email2=form.email2.data,
 
-        phone1=form.phone1.data,
-        phoneb=form.phoneb.data,
+                    phone1=form.phone1.data,
+                    phoneb=form.phoneb.data,
 
-        interest=form.interest.data,
-        password = form.password.data)
+                    file1=form.file1.data,
+                    file2=form.file2.data,
+                    file3=form.file3.data,
+                    file4=form.file4.data,
+
+                    interest=form.interest.data,
+                    password=form.password.data)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('login'))
