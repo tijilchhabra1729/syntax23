@@ -1,1 +1,0 @@
-# sigf-platform
