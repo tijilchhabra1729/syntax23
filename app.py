@@ -1,6 +1,6 @@
 from Tool import app,db
 from Tool.forms import RegistrationForm, LoginForm, VisitorForm_1
-from Tool.models import User
+from Tool.models import User, Locker
 from flask import render_template, request, url_for, redirect, flash, abort, jsonify, make_response
 from flask_login import current_user, login_required, login_user, logout_user
 from flask import render_template, request
@@ -8,19 +8,31 @@ import qrcode
 import random
 import string
 import cv2
-import webbrowser
 
 
 cap = cv2.VideoCapture(0)
 detector = cv2.QRCodeDetector()
 
-with app.app_context():
-    db.create_all()
+
+def create_locker():
+    for i in range(5):
+        key = create_key()
+        img = qrcode.make(key)
+        img.save("locker"+str(i)+".png")
+        locker = Locker(status = 0,
+                        key = key)
+        db.session.add(locker)
+        db.session.commit()
 
 def create_key():
     n = 10
     my_str = ''.join(random.choices(string.ascii_uppercase + string.digits, k = n))
     return my_str
+
+with app.app_context():
+    db.create_all()
+    # create_locker()
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -31,13 +43,15 @@ def index():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        print(9)
+        key = create_key()
+        img = qrcode.make(key)
         user = User(name=form.name.data,
                     email=form.email.data,
-                    password=form.password.data)
-        print('hey')
+                    password=form.password.data,
+                    key=key)
         db.session.add(user)
         db.session.commit()
+        img.save(str(user.id)+".png")  
         return redirect(url_for('login'))
     return render_template('register.htm', form=form)
 
@@ -77,19 +91,37 @@ def login():
 @login_required
 def locker():
     if current_user.manager == None:
-        form1 = VisitorForm_1()
-        if form1.validate_on_submit():
+        while True:
+            _,img = cap.read()
+            data, bbox, _ = detector.detectAndDecode(img)
+            if data: 
+                a = data
+                break
+            cv2.imshow('scan', img)
+            if cv2.waitKey(1) == ord('q'):
+                break
+        try:
+            cap.release()
+        except:
+            print("Scanned")
+        cv2.destroyAllWindows() 
+        locker = Locker.query.filter_by(locker_key=str(a)).first()
+        locker.user_id = current_user.id
+        # current_user.lockers.append(locker)
+        locker.locker_status = 1
+        db.session.commit()
+        print(locker.locker_status)
+        return render_template('visitor.htm')
 
-            data = create_key()
-            img = qrcode.make(data)
-            current_user.key = data
-            db.session.commit()
-            user_id = current_user.id
-            img.save(str(user_id)+".png")    
 
-        return render_template('visitor.htm', form1=form1)
+@app.route('/locker/<locker_id>')
+@login_required
+def manager(locker_id):
+    locker = Locker.query.get(locker_id)
+    if locker.locker_status == 0:
+        return "unlocked"
     
-    else:
+    if current_user.manager != None:
         while True:
             _,img = cap.read()
             data, bbox, _ = detector.detectAndDecode(img)
@@ -104,21 +136,33 @@ def locker():
         except:
             print("Scanned")
         cv2.destroyAllWindows()
+        user = User.query.get(locker.user_id)
+        if user.key == str(a):
+            name = user.name
+            f = "thank you " + name + " locker unlocked"
+            locker.locker_status = 0
+            locker.users = None
+            db.session.commit()
+            return(f)
+        else:
+            f = 'error'
+            return(f)
 
-        user = User.query.filter_by(key=a).first()
-        name = user.name
-        f = "thank you " + name
-        return(f)
 
 @app.route('/temp')
 def shit():
     user = User(name="manager",
                     email='admin@gmail.com',
                     password='password',
-                    manager=1)
+                    manager=1,
+                    key=create_key())
     print('hey')
     db.session.add(user)
     db.session.commit()
 
+
+
+
+    
 if __name__ == '__main__':
     app.run(debug=True)
