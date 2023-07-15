@@ -28,3 +28,10 @@ class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Log in')
+
+
+class VisitorForm_1(FlaskForm):
+    date = DateField('Date', validators=[DataRequired()])
+    size = IntegerField('Size', validators=[DataRequired()])
+    submit = SubmitField('Confirm')
+

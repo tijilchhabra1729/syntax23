@@ -13,12 +13,15 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
     email = db.Column(db.String(64))
+    manager = db.Column(db.Integer)
     password_hash = db.Column(db.String(128))
+    key = db.Column(db.String(128))
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def __init__(self, password, name,):
+    def __init__(self, password, name, email, manager):
         self.password_hash = generate_password_hash(password)
         self.name = name
         self.email = email
+        self.manager = manager

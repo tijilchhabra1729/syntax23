@@ -12,7 +12,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(basedir,'data.sqlite')
 app.config['SECRET_KEY'] = 'mysecret'
 db = SQLAlchemy(app)
-Migrate(app, db)
 
 
 ########### * login config * #################
